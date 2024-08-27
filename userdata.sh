@@ -31,3 +31,33 @@ EOF
 )
 
 # sudo nano /etc/apache2/mods-enabled/dir.conf
+
+
+# #!/bin/bash
+#   # Update package list and install Apache, MySQL, and PHP
+#   sudo apt-get update
+#   sudo apt-get install -y apache2 mysql-server php libapache2-mod-php php-mysql
+
+#   # Download and extract WordPress
+#   sudo wget https://wordpress.org/latest.tar.gz
+#   sudo tar -xzvf latest.tar.gz
+#   sudo rsync -av wordpress/* /var/www/html/
+
+#   # Set permissions for WordPress files
+#   sudo chown -R www-data:www-data /var/www/html/
+#   sudo chmod -R 755 /var/www/html/
+
+#   # Move and configure wp-config.php
+#   sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+
+#   # Replace database connection settings in wp-config.php
+#   sudo sed -i "s/database_name_here/${Wordpress}/" /var/www/html/wp-config.php
+#   sudo sed -i "s/username_here/${admin}/" /var/www/html/wp-config.php
+#   sudo sed -i "s/password_here/${mysql200}/" /var/www/html/wp-config.php
+#   sudo sed -i "s/localhost/${demo.crw8c6mckgwz.us-east-1.rds.amazonaws.com}/" /var/www/html/wp-config.php
+
+#   # Adjust Apache directory index order to prioritize index.php
+#   sudo sed -i 's/DirectoryIndex.*$/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/' /etc/apache2/mods-enabled/dir.conf
+
+#   # Restart Apache service
+#   sudo systemctl restart apache2

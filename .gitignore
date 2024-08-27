@@ -1,3 +1,6 @@
 terraform.tfstate
 .terraform.lock.hcl
 .terraform
+.terraform.tfstate.lock.info
+.userdata.sh
+.terraform.tfstate.backup
