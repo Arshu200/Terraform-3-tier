@@ -3,4 +3,4 @@ terraform.tfstate
 .terraform
 .terraform.tfstate.lock.info
 .userdata.sh
-.terraform.tfstate.backup
+terraform.tfstate.backup
