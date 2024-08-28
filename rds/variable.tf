@@ -3,14 +3,14 @@ variable "identifier" {
 }
 
 variable "db_name" {
-  default = "Wordpress"
+  default = "wordpress"
 }
 
-variable "username" {
+variable "db_user" {
   default = "admin"
 }
 
-variable "password" {
+variable "db_pswd" {
   default = "mysql200"
 }
 

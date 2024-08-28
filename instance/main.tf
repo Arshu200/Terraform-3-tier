@@ -67,7 +67,34 @@ resource "aws_instance" "app-server-1" {
   security_groups = [var.Application-SG]
   key_name        = "my-key-pair"
   subnet_id       = var.privateSubnet1
-  user_data       = file("demo.sh")
+  # user_data       = file("demo.sh")
+  user_data = base64encode(<<-EOF
+      #!/bin/bash
+      sudo apt update
+      sudo apt install -y apache2 mysql-client php php-mysql
+      wget https://wordpress.org/latest.tar.gz
+      tar -xzf latest.tar.gz
+      sudo cp -r wordpress/* /var/www/html/
+      sudo chown -R www-data:www-data /var/www/html/
+      sudo chmod -R 755 /var/www/html/
+
+      # Configure WordPress
+      cat <<EOF > /var/www/html/wp-config.php
+      <?php
+      define( 'DB_NAME', '${var.db_name}' );
+      define( 'DB_USER', '${var.db_user}' );
+      define( 'DB_PASSWORD', '${var.db_pswd}' );
+      define( 'DB_HOST', '${var.db_endpoint}' );
+      define( 'DB_CHARSET', 'utf8' );
+      define( 'DB_COLLATE', '' );
+      $table_prefix = 'wp_';
+      define( 'WP_DEBUG', false );
+      if ( !defined('ABSPATH') )
+      define('ABSPATH', dirname(__FILE__) . '/');
+      require_once(ABSPATH . 'wp-settings.php');
+      ?>
+      EOF
+  )
   tags = {
     Name = "Application-Web1"
   }
@@ -81,7 +108,34 @@ resource "aws_instance" "app-server-2" {
   security_groups = [var.Application-SG]
   key_name        = "my-key-pair"
   subnet_id       = var.privateSubnet2
-  user_data       = file("demo.sh")
+  # user_data       = file("demo.sh")
+  user_data = base64encode(<<-EOF
+      #!/bin/bash
+      sudo apt update
+      sudo apt install -y apache2 mysql-client php php-mysql
+      wget https://wordpress.org/latest.tar.gz
+      tar -xzf latest.tar.gz
+      sudo cp -r wordpress/* /var/www/html/
+      sudo chown -R www-data:www-data /var/www/html/
+      sudo chmod -R 755 /var/www/html/
+
+      # Configure WordPress
+      cat <<EOF > /var/www/html/wp-config.php
+      <?php
+      define( 'DB_NAME', '${var.db_name}' );
+      define( 'DB_USER', '${var.db_user}' );
+      define( 'DB_PASSWORD', '${var.db_pswd}' );
+      define( 'DB_HOST', '${var.db_endpoint}' );
+      define( 'DB_CHARSET', 'utf8' );
+      define( 'DB_COLLATE', '' );
+      $table_prefix = 'wp_';
+      define( 'WP_DEBUG', false );
+      if ( !defined('ABSPATH') )
+      define('ABSPATH', dirname(__FILE__) . '/');
+      require_once(ABSPATH . 'wp-settings.php');
+      ?>
+      EOF
+  )
   tags = {
     Name = "Application-Web2"
   }

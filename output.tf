@@ -1,5 +1,5 @@
-output "rds-endpoint" {
-  value = module.rds.rds-endpoint
+output "db_endpoint" {
+  value = module.rds.db_endpoint
 }
 
 output "BastionHost1" {

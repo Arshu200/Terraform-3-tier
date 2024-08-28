@@ -23,19 +23,19 @@ variable "target_group_arn" {
 
 }
 
-# variable "db_user" {
-#   default = "admin"
-# }
+variable "db_user" {
+  default = "admin"
+}
 
-# variable "db_name" {
-#   default = "application-rds"
-# }
+variable "db_name" {
+  default = "wordpress"
+}
 
-# variable "db_password" {
-#   default = "mysql200"
-# }
+variable "db_pswd" {
+  default = "mysql200"
+}
 
-# variable "db_host" {
+variable "db_endpoint" {
 
-# }
+}
 

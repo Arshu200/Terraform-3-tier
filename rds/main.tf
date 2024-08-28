@@ -4,8 +4,8 @@ resource "aws_db_instance" "rds" {
   allocated_storage      = 20
   storage_type           = "gp2"
   db_name                = var.db_name
-  username               = var.username
-  password               = var.password
+  username               = var.db_user
+  password               = var.db_pswd
   engine                 = var.engine
   engine_version         = "8.0.35"
   vpc_security_group_ids = [var.application-sg]
@@ -25,9 +25,11 @@ resource "aws_db_subnet_group" "subnet_group" {
 }
 
 
-output "rds-endpoint" {
+output "db_endpoint" {
   value = element(split(":", aws_db_instance.rds.endpoint), 0)
   # value = aws_db_instance.rds.id
 }
+
+
 
 
