@@ -78,21 +78,19 @@ resource "aws_instance" "app-server-1" {
       sudo chown -R www-data:www-data /var/www/html/
       sudo chmod -R 755 /var/www/html/
 
-      # Configure WordPress
-      cat <<EOF > /var/www/html/wp-config.php
-      <?php
-      define( 'DB_NAME', '${var.db_name}' );
-      define( 'DB_USER', '${var.db_user}' );
-      define( 'DB_PASSWORD', '${var.db_pswd}' );
-      define( 'DB_HOST', '${var.db_endpoint}' );
-      define( 'DB_CHARSET', 'utf8' );
-      define( 'DB_COLLATE', '' );
-      $table_prefix = 'wp_';
-      define( 'WP_DEBUG', false );
-      if ( !defined('ABSPATH') )
-      define('ABSPATH', dirname(__FILE__) . '/');
-      require_once(ABSPATH . 'wp-settings.php');
-      ?>
+      sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+
+      # Replace database connection settings in wp-config.php
+      sed -i "s/database_name_here/${var.db_name}/" /var/www/html/wp-config.php
+      sed -i "s/username_here/${var.db_user}/" /var/www/html/wp-config.php
+      sed -i "s/password_here/${var.db_pswd}/" /var/www/html/wp-config.php
+      sed -i "s/localhost/${var.db_endpoint}/" /var/www/html/wp-config.php
+      
+      # sudo nano /etc/apache2/mods-enabled/dir.conf
+      
+      sed -i 's/DirectoryIndex.*$/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/' /etc/apache2/mods-enabled/dir.conf
+      sudo systemctl restart apache2
+      sudo systemctl enable apache2
       EOF
   )
   tags = {
