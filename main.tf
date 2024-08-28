@@ -44,3 +44,13 @@ module "auto-scaling" {
   target_group_arn = module.alb.target_group_arn
   db_endpoint      = module.rds.db_endpoint
 }
+
+module "cdn" {
+  source       = "./cloudfront"
+  alb_dns_name = module.alb.alb_dns_name
+}
+
+# module "route53" {
+#   source = "./route53"
+  
+# }
