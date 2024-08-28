@@ -4,9 +4,10 @@ resource "aws_launch_configuration" "wordpress" {
   image_id      = var.ami
   instance_type = var.type
   key_name      = "my-key-pair"
+  user_data     = file("demo.sh")
   ebs_block_device {
-    device_name = "/dev/xvda"
-    volume_size = 10
+    device_name           = "/dev/xvda"
+    volume_size           = 10
     delete_on_termination = true
   }
   security_groups = [var.Application-SG]
@@ -17,8 +18,8 @@ resource "aws_launch_configuration" "wordpress" {
 
 # <-------------Creating the auto scaling group------------->
 resource "aws_autoscaling_group" "app-asg" {
-  launch_configuration = aws_launch_configuration.wordpress.id
-  name = "AutoScalingGroup"
+  launch_configuration      = aws_launch_configuration.wordpress.id
+  name                      = "AutoScalingGroup"
   min_size                  = 1
   max_size                  = 3
   desired_capacity          = 1

@@ -66,10 +66,11 @@ resource "aws_instance" "app-server-1" {
   instance_type   = var.type
   security_groups = [var.Application-SG]
   key_name        = "my-key-pair"
-  subnet_id       = var.privateSubnet1 
+  subnet_id       = var.privateSubnet1
+  user_data       = file("demo.sh")
   tags = {
     Name = "Application-Web1"
-  }  
+  }
 }
 
 # <---------------------Creating the Application server-2 -------------------->
@@ -80,6 +81,7 @@ resource "aws_instance" "app-server-2" {
   security_groups = [var.Application-SG]
   key_name        = "my-key-pair"
   subnet_id       = var.privateSubnet2
+  user_data       = file("demo.sh")
   tags = {
     Name = "Application-Web2"
   }
