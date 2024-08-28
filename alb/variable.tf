@@ -1,8 +1,8 @@
-variable "privateSubnet1" {
+variable "publicSubnet1" {
   
 }
 
-variable "privateSubnet2" {
+variable "publicSubnet2" {
   
 }
 

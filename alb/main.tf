@@ -3,7 +3,7 @@ resource "aws_lb" "app-alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [var.Application-SG]
-  subnets            = [var.privateSubnet1, var.privateSubnet2]
+  subnets            = [var.publicSubnet1, var.publicSubnet2]
   tags = {
     Name = "application loadbalancer"
   }

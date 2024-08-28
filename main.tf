@@ -29,8 +29,8 @@ module "alb" {
   source          = "./alb"
   Application-SG  = module.vpc.Application-SG
   vpc_id          = module.vpc.vpc_id
-  privateSubnet1  = module.vpc.Private-Subnet1
-  privateSubnet2  = module.vpc.Private-Subnet2
+  publicSubnet1  = module.vpc.Public-Subnet1
+  publicSubnet2  = module.vpc.Public-Subnet1
   private-server2 = module.instance.app2-privateIp2
   private-server1 = module.instance.app1-privateIp1
 }
